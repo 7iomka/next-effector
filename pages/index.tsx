@@ -6,6 +6,8 @@ const Page: NextPage = () => {
   return <HomePage />
 }
 
+Page.Layout = HomePage.Layout
+
 Page.getInitialProps = createGetInitialProps({ pageEvent: pageStarted })
 
 export default Page

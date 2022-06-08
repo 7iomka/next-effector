@@ -1,19 +1,16 @@
 import { ReactNode } from 'react'
 import { Header } from '@app/widgets/header'
-import styles from './styles.module.css'
 
 export interface Props {
   header?: ReactNode
-  title: string
-  content: ReactNode
+  children?: ReactNode
 }
 
-export function BaseTemplate({ header = <Header />, title, content }: Props) {
+export function BaseTemplate({ header = <Header />, children }: Props) {
   return (
     <>
       {header}
-      <h2 className={styles.title}>{title}</h2>
-      <main className={styles.content}>{content}</main>
+      {children}
     </>
   )
 }

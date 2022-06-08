@@ -27,4 +27,6 @@ Page.getInitialProps = createGetInitialProps<Props>({
   },
 })
 
+Page.Layout = MyProfilePage.Layout
+
 export default Page

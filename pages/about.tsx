@@ -19,4 +19,6 @@ export const getStaticProps: GetStaticProps<Props> = async () => ({
   },
 })
 
+Page.Layout = AboutPage.Layout
+
 export default Page
