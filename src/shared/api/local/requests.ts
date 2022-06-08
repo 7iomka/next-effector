@@ -1,5 +1,5 @@
 import { createRequest } from './request'
-import { Bio, User } from './types'
+import { Bio, Copy, User } from './types'
 
 export const getMeFx = createRequest<void, User | null>({
   username: 'risen',
@@ -11,3 +11,9 @@ export const getBioFx = createRequest<void, Bio | null>({
   birthDate: new Date().toISOString(),
   occupation: 'No occupation, just visiting',
 })
+
+export const getCopyFx = createRequest<void, Copy | null>(
+  'Loaded copyright (kek)'
+)
+
+export const getCustomInfoFx = createRequest<void, string | null>('Custom info')

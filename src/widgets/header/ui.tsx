@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import { useStore } from 'effector-react'
 import Link from 'next/link'
-import { $authenticatedUser } from '@app/entities/authenticated-user'
-import { paths } from '@app/shared/routing'
+import { $authenticatedUser } from '@/entities/authenticated-user'
+import { paths } from '@/shared/routing'
 import styles from './styles.module.css'
 
 interface Route {
@@ -22,6 +22,14 @@ const routes: Route[] = [
   {
     title: 'About',
     path: paths.about(),
+  },
+  {
+    title: 'Account',
+    path: paths.account(),
+  },
+  {
+    title: 'Account Inner',
+    path: paths.accountInner(),
   },
 ]
 

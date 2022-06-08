@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import NextErrorPage from 'next/error'
-import { MyProfilePage } from '@/pages/my-profile'
+import { AccountPage } from '@/pages/account'
 
 interface Props {
   notFound?: boolean
@@ -11,11 +11,10 @@ const Page: NextPage<Props> = ({ notFound }) => {
     return <NextErrorPage statusCode={404} />
   }
 
-  return <MyProfilePage />
+  return <AccountPage />
 }
 
-Page.getInitialProps = MyProfilePage.getInitialProps
-
-Page.Layout = MyProfilePage.Layout
+Page.Layout = AccountPage.Layout
+Page.getInitialProps = AccountPage.getInitialProps
 
 export default Page

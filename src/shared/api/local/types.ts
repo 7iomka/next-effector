@@ -8,3 +8,5 @@ export interface Bio {
   birthDate: string
   occupation: string
 }
+
+export type Copy = string

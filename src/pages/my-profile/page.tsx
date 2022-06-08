@@ -1,9 +1,9 @@
 import { useStore } from 'effector-react'
-import { BaseTemplate } from '@app/computed/widgets/templates'
-import { $authenticatedUser } from '@app/entities/authenticated-user'
-import { Content } from '@app/shared/ui/content'
-import { Title } from '@app/shared/ui/title'
-import { $bio } from './model'
+import { BaseLayout, createGetInitialProps } from '@/computed/widgets/layouts'
+import { $authenticatedUser } from '@/entities/authenticated-user'
+import { Content } from '@/shared/ui/content'
+import { Title } from '@/shared/ui/title'
+import { $bio, pageStarted } from './model'
 
 export function MyProfilePage() {
   const user = useStore($authenticatedUser)
@@ -22,4 +22,15 @@ export function MyProfilePage() {
   )
 }
 
-MyProfilePage.Layout = BaseTemplate
+MyProfilePage.Layout = BaseLayout
+
+MyProfilePage.getInitialProps = createGetInitialProps({
+  pageEvent: pageStarted,
+  create(scope) {
+    return async ({ res }) => {
+      const notFound = scope.getState($bio) === null
+      if (notFound && res) res.statusCode = 404
+      return { notFound }
+    }
+  },
+})

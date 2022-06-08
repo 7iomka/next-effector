@@ -1,13 +1,13 @@
 import {
   createAppGetInitialProps,
   createAppGetServerSideProps,
-} from '@app/shared/lib/effector'
-import { appStarted } from './model'
+} from '@/shared/lib/effector'
+import { baseLayoutBooted } from './model'
 
 export const createGetInitialProps = createAppGetInitialProps({
-  appEvent: appStarted,
+  appEvents: [baseLayoutBooted],
 })
 
 export const createGetServerSideProps = createAppGetServerSideProps({
-  appEvent: appStarted,
+  appEvents: [baseLayoutBooted],
 })

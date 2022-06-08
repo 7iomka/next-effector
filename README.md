@@ -17,7 +17,7 @@ The second thing you need to do is to enhance your `App` by using `withEffector`
 /* pages/_app.tsx */
 
 import App from 'next/app'
-import { withEffector } from '@app/shared/lib/effector'
+import { withEffector } from '@/shared/lib/effector'
 
 export default withEffector(App)
 ```
@@ -35,12 +35,12 @@ You can create two fabrics:
 - `createGetServerSideProps` (usually, used only for edge-cases)
 
 ```tsx
-/* @app/pages/shared/bindings.ts */
+/* @/pages/shared/bindings.ts */
 
 import {
   createAppGetInitialProps,
   createAppGetServerSideProps
-} from '@app/shared/lib/effector'
+} from '@/shared/lib/effector'
 import { appStarted } from './model'
 
 export const createGetInitialProps = createAppGetInitialProps({
@@ -65,11 +65,11 @@ After that, you can use it in your pages:
 /* pages/profile/index.tsx */
 
 import { NextPage } from 'next'
-import { MyProfilePage, pageStarted } from '@app/pages/my-profile'
+import { MyProfilePage, pageStarted } from '@/pages/my-profile'
 import {
   createGetInitialProps,
   createGetServerSideProps
-} from '@app/processes/app'
+} from '@/processes/app'
 
 const Page: NextPage = () => {
   return <MyProfilePage />

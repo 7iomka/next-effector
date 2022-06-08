@@ -1,5 +1,5 @@
 import { attach, createEvent, restore, sample } from 'effector'
-import { localApi } from '@app/shared/api'
+import { localApi } from '@/shared/api'
 
 const loadMeFx = attach({ effect: localApi.getMeFx })
 

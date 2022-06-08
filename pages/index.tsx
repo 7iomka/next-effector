@@ -1,13 +1,12 @@
-import { NextPage } from 'next'
-import { HomePage, pageStarted } from '@app/pages/home'
-import { createGetInitialProps } from '@app/pages/shared'
+import { HomePage } from '@/pages/home'
 
-const Page: NextPage = () => {
-  return <HomePage />
-}
+export default HomePage
+// const Page: NextPage = () => {
+//   return <HomePage />
+// }
 
-Page.Layout = HomePage.Layout
+// Page.Layout = HomePage.Layout
 
-Page.getInitialProps = createGetInitialProps({ pageEvent: pageStarted })
+// Page.getInitialProps = HomePage.getInitialProps
 
-export default Page
+// export default Page

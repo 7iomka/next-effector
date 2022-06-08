@@ -143,11 +143,11 @@ let currentScope: Scope | null = null
 type GetInitialProps<P> = (context: NextPageContext) => Promise<P>
 
 export interface CreateAppGIPConfig {
-  appEvent?: InitialPropsEvent
+  appEvents?: InitialPropsEvent[]
 }
 
 export interface CreateGIPConfig<P> {
-  pageEvent?: InitialPropsEvent
+  pageEvents?: InitialPropsEvent[]
   create?: (scope: Scope) => GetInitialProps<P>
 }
 
@@ -192,9 +192,11 @@ function useWrappedAppEvent(appEvent: AnyEvent) {
 // #endregion
 
 export function createAppGetInitialProps({
-  appEvent,
+  appEvents,
 }: CreateAppGIPConfig = {}) {
-  const wrappedAppEvent = appEvent ? wrapAppEvent(appEvent) : null
+  const wrappedAppEvents = appEvents
+    .filter(Boolean)
+    .map((appEvent) => wrapAppEvent(appEvent))
 
   return function createGetInitialProps<P extends AnyProps = AnyProps>({
     pageEvent,
@@ -212,7 +214,7 @@ export function createAppGetInitialProps({
        * On client-side, use only page event,
        * as we don't want to run app event again
        */
-      const events = [wrappedAppEvent, pageEvent].filter(isEvent)
+      const events = [...wrappedAppEvents, pageEvent].filter(isEvent)
 
       /*
        * Execute resulting Effector events,
@@ -292,7 +294,9 @@ export function withEffector<P = {}, CP = {}, S = {}>(App: AppType<P, CP, S>) {
   }
 }
 
-export function useClientAppEvent(appEvent: AnyEvent) {
-  const event = useWrappedAppEvent(appEvent)
-  useEffect(() => event(), [event])
-}
+// export function useClientAppEvent(appEvents: AnyEvent[]) {
+
+//   const events = appEvents.map((appEvent) => useWrappedAppEvent(appEvent))
+//   const event = useWrappedAppEvent(appEvent)
+//   useEffect(() => event(), [event])
+// }
