@@ -4,12 +4,12 @@ import '@fontsource/fira-mono'
 import '@app/shared/ui/globals.css'
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
-import { Fragment, ReactElement, ReactNode } from 'react'
+import { ElementType, Fragment, ReactNode } from 'react'
 import { withEffector } from '@app/shared/lib/effector'
 
 type NextPageWithLayout = NextPage & {
   // getLayout?: (page: ReactElement) => ReactNode
-  Layout?: ReactNode
+  Layout?: ElementType
 }
 
 type AppPropsWithLayout = AppProps & {
