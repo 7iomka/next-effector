@@ -6,5 +6,5 @@ export const baseLayoutWithAsideBooted = createEvent()
 
 sample({
   clock: baseLayoutWithAsideBooted,
-  target: [baseLayoutBooted, asideBooted],
+  target: [baseLayoutBooted, asideBooted], // combine events
 })

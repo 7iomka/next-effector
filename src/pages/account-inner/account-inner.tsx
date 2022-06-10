@@ -1,14 +1,14 @@
 import { useStore } from 'effector-react'
-import {
-  BaseLayoutWithAside,
-  createGetInitialProps,
-} from '@/computed/widgets/layouts/base-with-aside'
 import { $authenticatedUser } from '@/entities/authenticated-user'
+import {
+  createGetInitialProps,
+  getBaseLayoutWithAside,
+} from '@/pages/shared/layouts/base-with-aside'
 import { Content } from '@/shared/ui/content'
 import { Title } from '@/shared/ui/title'
 import { $bio, pageStarted } from './model'
 
-export function AccountInnerPage() {
+export const AccountInnerPage: NextPageWithLayout = () => {
   const user = useStore($authenticatedUser)
   const bio = useStore($bio)
 
@@ -23,7 +23,8 @@ export function AccountInnerPage() {
   )
 }
 
-AccountInnerPage.Layout = BaseLayoutWithAside
-AccountInnerPage.getInitialProps = createGetInitialProps({
+AccountInnerPage.getLayout = getBaseLayoutWithAside
+
+export const getInitialProps = createGetInitialProps({
   pageEvent: pageStarted,
 })

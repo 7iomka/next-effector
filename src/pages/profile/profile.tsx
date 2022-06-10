@@ -1,11 +1,11 @@
 import { useStore } from 'effector-react'
-import { BaseLayout, createGetInitialProps } from '@/computed/widgets/layouts'
 import { $authenticatedUser } from '@/entities/authenticated-user'
+import { BaseLayout, createGetInitialProps } from '@/pages/shared/layouts/base'
 import { Content } from '@/shared/ui/content'
 import { Title } from '@/shared/ui/title'
 import { $bio, pageStarted } from './model'
 
-export function MyProfilePage() {
+export const ProfilePage: NextPageWithLayout = () => {
   const user = useStore($authenticatedUser)
   const bio = useStore($bio)
 
@@ -22,15 +22,15 @@ export function MyProfilePage() {
   )
 }
 
-MyProfilePage.Layout = BaseLayout
+ProfilePage.getLayout = (component) => <BaseLayout>{component}</BaseLayout>
 
-MyProfilePage.getInitialProps = createGetInitialProps({
+export const getInitialProps = createGetInitialProps({
   pageEvent: pageStarted,
-  create(scope) {
-    return async ({ res }) => {
+  create:
+    (scope) =>
+    async ({ res }) => {
       const notFound = scope.getState($bio) === null
       if (notFound && res) res.statusCode = 404
       return { notFound }
-    }
-  },
+    },
 })

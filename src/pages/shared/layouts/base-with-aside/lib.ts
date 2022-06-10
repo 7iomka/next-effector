@@ -2,12 +2,12 @@ import {
   createAppGetInitialProps,
   createAppGetServerSideProps,
 } from '@/shared/lib/effector'
-import { baseLayoutBooted } from './model'
+import { baseLayoutWithAsideBooted } from './model'
 
 export const createGetInitialProps = createAppGetInitialProps({
-  appEvents: [baseLayoutBooted],
+  sharedEvents: [baseLayoutWithAsideBooted],
 })
 
 export const createGetServerSideProps = createAppGetServerSideProps({
-  appEvents: [baseLayoutBooted],
+  sharedEvents: [baseLayoutWithAsideBooted],
 })

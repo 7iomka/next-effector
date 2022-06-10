@@ -1,12 +1,5 @@
-import { HomePage } from '@/pages/home'
+import { getInitialProps, HomePage } from '@/pages/home'
+
+HomePage.getInitialProps = getInitialProps
 
 export default HomePage
-// const Page: NextPage = () => {
-//   return <HomePage />
-// }
-
-// Page.Layout = HomePage.Layout
-
-// Page.getInitialProps = HomePage.getInitialProps
-
-// export default Page

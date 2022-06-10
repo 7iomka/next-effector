@@ -1,11 +1,11 @@
 import { useStore } from 'effector-react'
-import { BaseLayout, createGetInitialProps } from '@/computed/widgets/layouts'
 import { $authenticatedUser } from '@/entities/authenticated-user'
+import { BaseLayout, createGetInitialProps } from '@/pages/shared/layouts/base'
 import { Content } from '@/shared/ui/content'
 import { Title } from '@/shared/ui/title'
 import { pageStarted } from './model'
 
-export function HomePage() {
+export const HomePage: NextPageWithLayout = () => {
   const user = useStore($authenticatedUser)
 
   return (
@@ -18,7 +18,8 @@ export function HomePage() {
   )
 }
 
-HomePage.Layout = BaseLayout
-HomePage.getInitialProps = createGetInitialProps({
+HomePage.getLayout = (component) => <BaseLayout>{component}</BaseLayout>
+
+export const getInitialProps = createGetInitialProps({
   pageEvent: pageStarted,
 })

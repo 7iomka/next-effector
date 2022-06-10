@@ -8,11 +8,11 @@ export interface Props {
   children?: ReactNode
 }
 
-export function BaseLayout({
+export const BaseLayout = ({
   header = <Header />,
   children,
   footer = <Footer />,
-}: Props) {
+}: Props) => {
   return (
     <>
       {header}
@@ -21,3 +21,7 @@ export function BaseLayout({
     </>
   )
 }
+
+export const getBaseLayout: NextLayoutGetter = (component) => (
+  <BaseLayout>{component}</BaseLayout>
+)
