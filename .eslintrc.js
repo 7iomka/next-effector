@@ -13,6 +13,10 @@ module.exports = configure({
   extend: {
     rules: {
       'effector/no-watch': 'off',
+      'sonarjs/prefer-single-boolean-return': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      'react/destructuring-assignment': 'off',
+      'react/jsx-props-no-spreading': 'off',
     },
   },
 })

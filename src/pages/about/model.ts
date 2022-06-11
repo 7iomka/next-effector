@@ -1,4 +1,13 @@
-import { createEvent } from 'effector'
-import { SharedNextContext } from '@/shared/lib/effector'
+import { createEffect, createEvent, restore, sample } from 'effector'
+import { StaticPageContext } from '@/shared/lib/effector'
 
-export const pageStarted = createEvent<SharedNextContext>()
+export const pageStarted = createEvent<StaticPageContext>()
+
+const createDescriptionFx = createEffect(() => 'Static Page Description')
+
+export const $description = restore(createDescriptionFx, null)
+
+sample({
+  clock: pageStarted,
+  target: createDescriptionFx,
+})

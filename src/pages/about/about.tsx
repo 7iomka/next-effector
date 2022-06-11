@@ -1,20 +1,18 @@
 import { useStore } from 'effector-react/scope'
 import { $authenticatedUser } from '@/entities/authenticated-user'
-import {
-  BaseLayout,
-  createGetServerSideProps,
-} from '@/pages/shared/layouts/base'
+import { BaseLayout, createGetStaticProps } from '@/pages/shared/layouts/base'
 import { Content } from '@/shared/ui/content'
 import { Title } from '@/shared/ui/title'
-import { pageStarted } from './model'
+import { $description, pageStarted } from './model'
 
 export interface Props {
-  description: string
+  customText: string
 }
 
-export const AboutPage: NextPageWithLayout<Props> = ({ description }) => {
+export const AboutPage: NextPageWithLayout<Props> = ({ customText }) => {
   console.info('AboutPage: render')
-  const user = useStore($authenticatedUser)
+  const user = useStore($authenticatedUser) // from entity model (global)
+  const description = useStore($description) // from page model
 
   return (
     <>
@@ -27,6 +25,7 @@ export const AboutPage: NextPageWithLayout<Props> = ({ description }) => {
           <br />
         </div>
         <p className="mt-4">{description}</p>
+        <p className="mt-4">{customText}</p>
       </Content>
     </>
   )
@@ -41,14 +40,13 @@ AboutPage.getLayout = (component) => (
   <BaseLayout footer={<CustomFooter />}>{component}</BaseLayout>
 )
 
-// TODO: make createGetStaticProps fabric
-export const getStaticProps = createGetServerSideProps({
+export const getStaticProps = createGetStaticProps({
   pageEvent: pageStarted,
-  create: () => async () => {
+  customize() {
     return {
       props: {
-        description:
-          'Some SSG website description with revalidate each 10 sec, result is ' +
+        customText:
+          'Some SSG page custom text with revalidate each 10 sec, result is ' +
           Math.random(),
       },
       revalidate: 10, // In seconds

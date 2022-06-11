@@ -10,12 +10,11 @@ import { withEffector } from '@/shared/lib/effector'
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout // see next-custom.d.ts
 }
-// @ts-ignore: TODO: fix withEffector typings when App has customized type
 const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
   if (Component.getLayout)
     return Component.getLayout(<Component {...pageProps} />)
 
   return <Component {...pageProps} />
 }
-// @ts-ignore: TODO: fix withEffector typings when App has customized type
+
 export default withEffector(MyApp)
