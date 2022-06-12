@@ -15,3 +15,7 @@
   @apply inline-block p-4;
   @apply hover:text-fuchsia-400;
 }
+
+.navlinkActive { 
+  @apply text-fuchsia-400;
+}

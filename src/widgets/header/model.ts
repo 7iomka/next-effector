@@ -1,9 +1,5 @@
-import { createEvent, sample } from 'effector'
-import { loadAuthenticatedUser } from '@/entities/authenticated-user'
+import { createEvent } from 'effector'
 
 export const headerBooted = createEvent()
 
-sample({
-  clock: headerBooted,
-  target: [loadAuthenticatedUser],
-})
+headerBooted.watch((v) => console.log('headerBooted called'))

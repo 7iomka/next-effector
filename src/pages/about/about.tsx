@@ -1,6 +1,9 @@
 import { useStore } from 'effector-react/scope'
-import { $authenticatedUser } from '@/entities/authenticated-user'
-import { BaseLayout, createGetStaticProps } from '@/pages/shared/layouts/base'
+import {
+  BaseLayout,
+  createGetStaticProps,
+  useLayoutEvent,
+} from '@/pages/shared/layouts/base'
 import { Content } from '@/shared/ui/content'
 import { Title } from '@/shared/ui/title'
 import { $description, pageStarted } from './model'
@@ -11,7 +14,7 @@ export interface Props {
 
 export const AboutPage: NextPageWithLayout<Props> = ({ customText }) => {
   console.info('AboutPage: render')
-  const user = useStore($authenticatedUser) // from entity model (global)
+  useLayoutEvent()
   const description = useStore($description) // from page model
 
   return (
@@ -20,9 +23,6 @@ export const AboutPage: NextPageWithLayout<Props> = ({ customText }) => {
       <Content>
         <div>
           <h3>This page is SSG</h3>
-          <br />
-          User is loaded: {user?.firstName}
-          <br />
         </div>
         <p className="mt-4">{description}</p>
         <p className="mt-4">{customText}</p>
@@ -45,11 +45,9 @@ export const getStaticProps = createGetStaticProps({
   customize() {
     return {
       props: {
-        customText:
-          'Some SSG page custom text with revalidate each 10 sec, result is ' +
-          Math.random(),
+        customText: 'Some SSG page custom text',
       },
-      revalidate: 10, // In seconds
+      // revalidate: 10, // In seconds
     }
   },
 })

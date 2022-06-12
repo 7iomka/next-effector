@@ -2,6 +2,7 @@ import {
   createAppGetInitialProps,
   createAppGetServerSideProps,
   createAppGetStaticProps,
+  usePageEvent,
 } from '@/shared/lib/effector'
 import {
   baseLayoutWithAsideBooted,
@@ -19,3 +20,8 @@ export const createGetServerSideProps = createAppGetServerSideProps({
 export const createGetStaticProps = createAppGetStaticProps({
   sharedEvents: [baseLayoutWithAsideStaticBooted],
 })
+
+export const useLayoutEvent = () =>
+  usePageEvent(baseLayoutWithAsideBooted, {
+    runOnce: true,
+  })

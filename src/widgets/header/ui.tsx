@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { useStore } from 'effector-react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { $authenticatedUser } from '@/entities/authenticated-user'
 import { paths } from '@/shared/routing'
 import styles from './styles.module.css'
@@ -12,29 +13,30 @@ interface Route {
 
 const routes: Route[] = [
   {
-    title: 'Home',
+    title: 'Home (GIP)',
     path: paths.home(),
   },
   {
-    title: 'My Profile',
+    title: 'My Profile (GIP)',
     path: paths.me(),
   },
   {
-    title: 'About',
+    title: 'About (SSG)',
     path: paths.about(),
   },
   {
-    title: 'Account',
+    title: 'Account (GIP)',
     path: paths.account(),
   },
   {
-    title: 'Account Inner',
+    title: 'Account Inner (GIP)',
     path: paths.accountInner(),
   },
 ]
 
 export function Header() {
   const user = useStore($authenticatedUser)
+  const router = useRouter()
 
   return (
     <header className={styles.header}>
@@ -46,7 +48,13 @@ export function Header() {
       <nav className={styles.navbar}>
         {routes.map((route) => (
           <Link key={route.path} href={route.path} passHref>
-            <a className={styles.navlink} href="_">
+            <a
+              className={clsx(
+                styles.navlink,
+                route.path === router.pathname && styles.navlinkActive
+              )}
+              href="_"
+            >
               {route.title}
             </a>
           </Link>

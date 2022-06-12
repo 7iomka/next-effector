@@ -5,6 +5,7 @@ const loadMeFx = attach({ effect: localApi.getMeFx })
 
 export const loadAuthenticatedUser = createEvent()
 
+loadAuthenticatedUser.watch(() => console.log('loadAuthenticatedUser called'))
 export const $authenticatedUser = restore(loadMeFx, null)
 
 sample({
